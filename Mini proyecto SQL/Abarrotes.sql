@@ -1,0 +1,31 @@
+CREATE TABLE Productos (
+	ID_SKU SERIAL PRIMARY KEY,
+	nombre_producto VARCHAR(150) NOT NULL,
+	descripción VARCHAR(150) NOT NULL,
+	precio VARCHAR(99) NOT NULL
+);
+CREATE TABLE cliente (
+	ID_Cliente SERIAL PRIMARY KEY,
+	nombre VARCHAR(150) NOT NULL,
+	apellidos VARCHAR(150) NOT NULL,
+	email VARCHAR(150) UNIQUE NOT NULL,
+	telefono VARCHAR(15) NOT NULL,
+	direccion VARCHAR(150) NOT NULL,
+	codigo_postal VARCHAR(150) NOT NULL,
+	Barrio_o_colonia VARCHAR(150) NOT NULL
+);
+CREATE TABLE venta (
+	ID_venta SERIAL PRIMARY KEY,
+   	Fecha VARCHAR(150) NOT NULL,            
+    Total VARCHAR(150) NOT NULL,
+	ID_Cliente INT NOT NULL,
+	FOREIGN KEY (ID_Cliente) REFERENCES cliente(ID_Cliente)
+);
+CREATE TABLE detalle_venta (
+	ID_detalle SERIAL PRIMARY KEY,
+	ID_SKU INT NOT NULL,
+	ID_venta INT NOT NULL,
+	cantidad VARCHAR(150) NOT NULL,
+	FOREIGN KEY (ID_SKU) REFERENCES productos(ID_SKU),
+	FOREIGN KEY (ID_venta) REFERENCES venta(ID_venta)
+);
